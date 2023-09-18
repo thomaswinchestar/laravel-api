@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,8 @@ class ProductApiController extends Controller
             'name' => 'required|string|min:5|max:20',
             'price' => 'required|numeric|min:1',
             'stock' => 'required|numeric|min:1',
+            'photos' => 'required',
+            'photos.*' => 'file|mimes:png,jpg|max:512',
         ]);
 
         $product = Product::create([
@@ -32,6 +35,15 @@ class ProductApiController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
         ]);
+
+        $photos = [];
+
+        foreach ($request->file('photos') as $key => $photo) {
+            $newName = $photo->store('public');
+            $photos[$key] = new Photo(['name' => $newName]);
+        }
+
+        $product->photos()->saveMany($photos);
 
         return response()->json($product);
     }

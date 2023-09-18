@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoApiController;
 use App\Http\Controllers\ProductApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('products', ProductApiController::class);
+
+Route::apiResource('photos', PhotoApiController::class);
