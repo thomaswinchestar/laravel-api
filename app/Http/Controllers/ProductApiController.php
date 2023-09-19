@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductApiController extends Controller
 {
@@ -34,6 +35,7 @@ class ProductApiController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'stock' => $request->stock,
+            'user_id' => Auth::id()
         ]);
 
         $photos = [];

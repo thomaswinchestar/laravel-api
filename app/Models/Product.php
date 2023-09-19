@@ -13,6 +13,7 @@ class Product extends Model
         'name',
         'price',
         'stock',
+        'user_id'
     ];
     protected $with = ['photos'];
     public function photos()

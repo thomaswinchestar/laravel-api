@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->double('price');
             $table->double('stock');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
